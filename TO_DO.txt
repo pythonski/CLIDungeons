@@ -1,0 +1,3 @@
+Create item objects for initial characters and set them in self.equipment of constructor
+
+Implement Character.equip, Character.unequip
