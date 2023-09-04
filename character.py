@@ -2,12 +2,12 @@ from random import randint
 
 class Character:
     
-    def __init__(self, isPlayer=False, isNew=None, name=None, role=None, attack=None, armor=None, health=None, health_max=None, encumbrance=None, encumbrance_ranged=None, magic=None, agility=None, money=None, equipment=None, inventory=None, abilities=None):
+    def __init__(self, is_player=False, is_new=None, name=None, role=None, attack=None, armor=None, health=None, health_max=None, encumbrance=None, encumbrance_ranged=None, magic=None, agility=None, money=None, equipment=None, inventory=None, abilities=None):
         #barbarian
-        if role == 'b' and isNew == True:
-            self.isPlayer = True
+        if role == 'b' and is_new == True:
+            self.is_player = True
             self.name = name
-            self.name = role
+            self.role = role
             self.attack = 3
             self.armor = 3
             self.health = 6
@@ -17,15 +17,15 @@ class Character:
             self.magic = 0
             self.agility = 2
             self.money = 0
-            self.equipment = ["ascia"]
-            self.inventory = {} 
+            self.equipment = [] # WATCH THIS: THERE SHOULD BE AN AXE OBJECT HERE
+            self.inventory = [] # list instead of dictionary?
             self.abilities = []
 
         #dwarf
-        if role == 'd' and isNew == True:
-            self.isPlayer = True
+        if role == 'd' and is_new == True:
+            self.is_player = True
             self.name = name
-            self.name = role
+            self.role = role
             self.attack = 2
             self.armor = 5
             self.health = 5
@@ -35,15 +35,15 @@ class Character:
             self.magic = 0
             self.agility = 1
             self.money = 0
-            self.equipment = ["ascia", "armatura pesante"]
-            self.inventory = {} 
+            self.equipment = [] # THERE SHOULD BE AXE AND HEAVY ARMOR OBJECTS HERE
+            self.inventory = [] # list instead of dictionary?
             self.abilities = []
 
 
         #load character from file
-        if isNew == False:
-            self.isPlayer = isPlayer
-            self.isNew = isNew
+        if is_new == False:
+            self.is_player = is_player
+            self.is_new = is_new
             self.name = name
             self.role = role
             self.attack = attack
@@ -66,7 +66,6 @@ class Character:
         
         return result
 
-
     #equip item from inventory
     def equip(self, item):
         if item in self.inventory and item.is_equipable: 
@@ -76,7 +75,7 @@ class Character:
                 current_armor = [item for item in self.equipment if item.category == "armor"]
                 #if currently armor, remove
                 if (current_armor):
-                    self.unequip (current_armor)
+                    self.unequip(*current_armor)
 
             #weapon or utility
             if (self.encumbrance + item.encumbrance_modifier > 2) or (self.encumbrance_ranged + item.encumbrance_ranged_modifier > 2):
@@ -86,12 +85,12 @@ class Character:
             #equip item
             else:
                 #move to equipment
-                self.inventory.remove (item)
+                self.inventory.remove(item)
                 self.equipment.append(item)
 
                 #apply encumbrance
                 self.encumbrance += item.encumbrance_modifier
-                self.encumbrance_ranged += item.ecumbrance_ranged_modifier
+                self.encumbrance_ranged += item.encumbrance_ranged_modifier
 
                 #apply modifiers
                 self.attack += item.attack_modifier
@@ -106,19 +105,18 @@ class Character:
             print(f"Item {item.name} cannot be equipped.\n")
             return   
 
-
     #Unequip item from equipment and put it in inventory
     def unequip(self, item):
 
         if item in self.equipment:
 
             #move to inventory
-            self.equipment.remove (item)
-            self.inventory.append (item)
+            self.equipment.remove(item)
+            self.inventory.append(item)
 
             #remove encumbrance
             self.encumbrance -= item.encumbrance_modifier
-            self.encumbrance_ranged -= item.ecumbrance_ranged_modifier
+            self.encumbrance_ranged -= item.encumbrance_ranged_modifier
 
             #remove modifiers
             self.attack -= item.attack_modifier

@@ -3,7 +3,7 @@ class Item:
     def __init__(self, name, category, is_equipable=False, quantity=1, encumbrance_modifier=0,encumbrance_ranged_modifier=0, attack_modifier=0, armor_modifier=0, health_modifier=0, health_max_modifier=0, magic_modifier=0, agility_modifier=0, abilities_modifier=0):
 
         self.name = name
-        self.category = name
+        self.category = category
             #armor, melee_weapon, ranged_weapon, utility
         self.is_equipable = is_equipable
         self.encumbrance_modifier = encumbrance_modifier
