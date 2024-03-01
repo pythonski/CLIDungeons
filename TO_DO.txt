@@ -1,0 +1,13 @@
+Debug di  gestione inventario
+    In particolare, discard function
+Create item objects for initial characters and set them in self.equipment of constructor
+Mettere attributi mancanti in oggetti standard oppure creare libreria completa di oggetti
+
+Implement in class that handles treasure loots special items as conditional calls to the item.py constructor 
+
+Idea di prompt di gioco:
+
+[F]-[E]-[R]-[F]-[F]-[x]-[]-[]-[]-[]-[]-[]-[B]			Conan H:6/6
+>
+
+Aggiungere classe Dungeon
